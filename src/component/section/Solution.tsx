@@ -223,7 +223,12 @@ export default function Solution() {
 
                 </Reveal>
 
-                {/* Tool Row - Giữ nguyên không đổi */}
+                {/* Tool Row - Tiêu đề nổi bật + hàng công cụ */}
+                <Reveal delay={300}>
+                    <div className="mb-6 mt-12">
+                        <h3 className="text-[20px] md:text-[24px] font-bold tracking-[-0.02em] text-cream">Các công cụ em hay dùng</h3>
+                    </div>
+                </Reveal>
                 <Reveal delay={320}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {TOOLS_DATA.map((tool, idx) => (
