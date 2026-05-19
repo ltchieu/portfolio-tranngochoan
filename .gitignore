@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 # ignored videos
-public/videoTVC/cindy.mp4
+public/videoTVC/cindy_compressed.mp4

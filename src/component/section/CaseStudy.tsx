@@ -22,15 +22,29 @@ export default function CaseStudy() {
     const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(true);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     const isYouTube = activeCase.videoUrl.includes("youtube.com") || activeCase.videoUrl.includes("youtu.be");
 
-    // Reset play/pause state when switching case study (the new video will auto-play)
+    // Reset play/pause state khi chuyển đổi case study
     useEffect(() => {
         setIsPlaying(true);
+        setIsMuted(true);
     }, [activeIdx]);
 
     const togglePlay = () => {
+        if (isYouTube) {
+            if (iframeRef.current?.contentWindow) {
+                const command = isPlaying ? "pauseVideo" : "playVideo";
+                iframeRef.current.contentWindow.postMessage(
+                    JSON.stringify({ event: "command", func: command, args: [] }),
+                    "*"
+                );
+                setIsPlaying(!isPlaying);
+            }
+            return;
+        }
+
         if (!videoRef.current) return;
         if (isPlaying) {
             videoRef.current.pause();
@@ -42,6 +56,18 @@ export default function CaseStudy() {
     };
 
     const toggleMute = () => {
+        if (isYouTube) {
+            if (iframeRef.current?.contentWindow) {
+                const command = isMuted ? "unMute" : "mute";
+                iframeRef.current.contentWindow.postMessage(
+                    JSON.stringify({ event: "command", func: command, args: [] }),
+                    "*"
+                );
+                setIsMuted(!isMuted);
+            }
+            return;
+        }
+
         if (!videoRef.current) return;
         videoRef.current.muted = !isMuted;
         setIsMuted(!isMuted);
@@ -100,8 +126,10 @@ export default function CaseStudy() {
                         <div className="relative min-h-[300px] lg:min-h-[500px] flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border bg-[#050505]">
                             {isYouTube ? (
                                 <iframe
+                                    ref={iframeRef}
+                                    key={activeCase.videoUrl}
                                     className="absolute inset-0 w-full h-full object-cover scale-[1.35] opacity-80 pointer-events-none"
-                                    src={`https://www.youtube.com/embed/${getYouTubeId(activeCase.videoUrl)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(activeCase.videoUrl)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
+                                    src={`https://www.youtube.com/embed/${getYouTubeId(activeCase.videoUrl)}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(activeCase.videoUrl)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
                                     allow="autoplay; encrypted-media"
                                     title={activeCase.title}
                                     frameBorder="0"
@@ -136,24 +164,22 @@ export default function CaseStudy() {
                             </div>
 
                             {/* Nút Điều Khiển Floating */}
-                            {!isYouTube && (
-                                <div className="absolute bottom-5 right-5 z-20 flex gap-2.5 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                                    <button
-                                        onClick={togglePlay}
-                                        className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
-                                        title={isPlaying ? "Tạm dừng" : "Phát"}
-                                    >
-                                        {isPlaying ? <FaPause size={14} /> : <FaPlay size={14} className="ml-0.5" />}
-                                    </button>
-                                    <button
-                                        onClick={toggleMute}
-                                        className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
-                                        title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
-                                    >
-                                        {isMuted ? <FaVolumeXmark size={14} /> : <FaVolumeHigh size={14} />}
-                                    </button>
-                                </div>
-                            )}
+                            <div className="absolute bottom-5 right-5 z-20 flex gap-2.5 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                                <button
+                                    onClick={togglePlay}
+                                    className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
+                                    title={isPlaying ? "Tạm dừng" : "Phát"}
+                                >
+                                    {isPlaying ? <FaPause size={14} /> : <FaPlay size={14} className="ml-0.5" />}
+                                </button>
+                                <button
+                                    onClick={toggleMute}
+                                    className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
+                                    title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+                                >
+                                    {isMuted ? <FaVolumeXmark size={14} /> : <FaVolumeHigh size={14} />}
+                                </button>
+                            </div>
                         </div>
 
                         {/* Cột phải: Content */}
