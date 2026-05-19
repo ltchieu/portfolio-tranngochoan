@@ -8,6 +8,12 @@ import {
 } from "react-icons/fa6";
 import { CASE_STUDIES, STATUS_CONFIG } from "@/constant/case";
 
+const getYouTubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+};
+
 export default function CaseStudy() {
     const [activeIdx, setActiveIdx] = useState(0);
     const activeCase = CASE_STUDIES[activeIdx];
@@ -16,6 +22,8 @@ export default function CaseStudy() {
     const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(true);
     const videoRef = useRef<HTMLVideoElement>(null);
+
+    const isYouTube = activeCase.videoUrl.includes("youtube.com") || activeCase.videoUrl.includes("youtu.be");
 
     // Reset play/pause state when switching case study (the new video will auto-play)
     useEffect(() => {
@@ -90,18 +98,28 @@ export default function CaseStudy() {
 
                         {/* Cột trái: Autoplay Video & Overlay */}
                         <div className="relative min-h-[300px] lg:min-h-[500px] flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border bg-[#050505]">
-                            {/* Thẻ Video: Dùng key để force component reload lại source khi đổi Tab */}
-                            <video
-                                ref={videoRef}
-                                key={activeCase.videoUrl}
-                                autoPlay
-                                loop
-                                muted={isMuted}
-                                playsInline
-                                className="absolute inset-0 w-full h-full object-cover opacity-80"
-                            >
-                                <source src={activeCase.videoUrl} type="video/mp4" />
-                            </video>
+                            {isYouTube ? (
+                                <iframe
+                                    className="absolute inset-0 w-full h-full object-cover scale-[1.35] opacity-80 pointer-events-none"
+                                    src={`https://www.youtube.com/embed/${getYouTubeId(activeCase.videoUrl)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(activeCase.videoUrl)}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
+                                    allow="autoplay; encrypted-media"
+                                    title={activeCase.title}
+                                    frameBorder="0"
+                                />
+                            ) : (
+                                /* Thẻ Video: Dùng key để force component reload lại source khi đổi Tab */
+                                <video
+                                    ref={videoRef}
+                                    key={activeCase.videoUrl}
+                                    autoPlay
+                                    loop
+                                    muted={isMuted}
+                                    playsInline
+                                    className="absolute inset-0 w-full h-full object-cover opacity-80"
+                                >
+                                    <source src={activeCase.videoUrl} type="video/mp4" />
+                                </video>
+                            )}
 
                             {/* Lớp gradient mờ phủ lên video để text dễ đọc */}
                             <div className="absolute inset-0 bg-linear-to-b from-black/60 via-transparent to-black/80 pointer-events-none"></div>
@@ -118,22 +136,24 @@ export default function CaseStudy() {
                             </div>
 
                             {/* Nút Điều Khiển Floating */}
-                            <div className="absolute bottom-5 right-5 z-20 flex gap-2.5 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                                <button
-                                    onClick={togglePlay}
-                                    className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
-                                    title={isPlaying ? "Tạm dừng" : "Phát"}
-                                >
-                                    {isPlaying ? <FaPause size={14} /> : <FaPlay size={14} className="ml-0.5" />}
-                                </button>
-                                <button
-                                    onClick={toggleMute}
-                                    className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
-                                    title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
-                                >
-                                    {isMuted ? <FaVolumeXmark size={14} /> : <FaVolumeHigh size={14} />}
-                                </button>
-                            </div>
+                            {!isYouTube && (
+                                <div className="absolute bottom-5 right-5 z-20 flex gap-2.5 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                                    <button
+                                        onClick={togglePlay}
+                                        className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
+                                        title={isPlaying ? "Tạm dừng" : "Phát"}
+                                    >
+                                        {isPlaying ? <FaPause size={14} /> : <FaPlay size={14} className="ml-0.5" />}
+                                    </button>
+                                    <button
+                                        onClick={toggleMute}
+                                        className="w-10 h-10 rounded-full bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-center text-cream hover:bg-green hover:text-black hover:border-transparent transition-all duration-300"
+                                        title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+                                    >
+                                        {isMuted ? <FaVolumeXmark size={14} /> : <FaVolumeHigh size={14} />}
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         {/* Cột phải: Content */}

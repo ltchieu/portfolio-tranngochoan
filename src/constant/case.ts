@@ -6,7 +6,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         title: "AI TVC NƯỚC HOA CINDY",
         shortTitle: "Nước Hoa Cindy",
         status: "win",
-        videoUrl: "/videoTVC/cindy.mp4",
+        videoUrl: "https://www.youtube.com/watch?v=IL2EdQJ_luE",
         problem: "Hình ảnh thương hiệu lâu đời dần trở nên cũ so với tệp khách hàng trẻ trên social media.",
         solution: "Build cinematic fashion-perfume commercial: nhất quán nhân vật, VFX hạt sáng & workflow đa lớp giữ visual đồng đều.",
         result: "133K+ views • 1K+ interactions • Pitching thành công • Mở rộng hợp tác dài hạn",
