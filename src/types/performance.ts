@@ -11,10 +11,3 @@ export interface ProcessStep {
     icon: ReactNode;
     text: string;
 }
-
-export interface MindsetItem {
-    icon: ReactNode;
-    category: string;
-    body: string[]; // Chuyển các dòng ngắt (\n) thành mảng chuỗi để dễ map
-    isDark?: boolean; // Đánh dấu cho thẻ xanh đặc biệt cuối cùng
-}

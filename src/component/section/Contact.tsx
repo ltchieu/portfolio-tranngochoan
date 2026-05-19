@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Reveal from "../ui/Reveal";
 import { SERVICE_GALLERY } from "@/constant/contact";
-import { FaEnvelope, FaPhone, FaTelegram, FaXmark } from "react-icons/fa6";
+import { FaEnvelope, FaPhone, FaTelegram, FaXmark, FaFacebook } from "react-icons/fa6";
 
 export default function Contact() {
     const [activeImageUrl, setActiveImageUrl] = useState<string | null>(null);
@@ -138,6 +138,15 @@ export default function Contact() {
                                 >
                                     <FaTelegram className="text-[16px]" />
                                     @sannxynapse
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/callmenoha"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2.5 bg-[rgba(240,237,232,0.08)] text-cream px-7 py-3.5 rounded-full border border-[rgba(240,237,232,0.15)] text-[14px] font-semibold transition-all duration-300 hover:-translate-y-1 hover:border-green/40 hover:bg-[rgba(205,255,90,0.08)] hover:shadow-[0_8px_25px_rgba(205,255,90,0.1)]"
+                                >
+                                    <FaFacebook className="text-[16px]" />
+                                    callmenoha
                                 </a>
                             </div>
                         </div>

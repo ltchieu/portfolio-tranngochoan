@@ -33,45 +33,59 @@ export default function Problem() {
 
                     {/* Item 1 */}
                     <Reveal delay={80}>
-                        <div className="grid grid-cols-[80px_1fr] gap-6 items-start pb-10 relative after:content-[''] after:absolute after:left-[39px] after:top-[48px] after:bottom-0 after:w-[1px] after:bg-border last:after:hidden">
-                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-[22px] flex-shrink-0 border border-border bg-card text-cream">
+                        <div className="bg-card border border-border rounded-2xl p-6 mb-6 transition-all duration-300 hover:border-[rgba(240,237,232,0.2)] hover:bg-[rgba(240,237,232,0.07)] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                            <div className="grid grid-cols-[80px_1fr] gap-6 items-start pb-2 relative after:content-[''] after:absolute after:left-[39px] after:top-[48px] after:bottom-0 after:w-[1px] after:bg-border last:after:hidden">
+                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-[22px] flex-shrink-0 border border-green/30 bg-[rgba(205,255,90,0.06)] text-green shadow-[0_0_0_1px_rgba(205,255,90,0.06)]">
                                 <FaClapperboard />
                             </div>
                             <div>
+                                <div className="inline-flex items-center rounded-full border border-green/20 bg-green/10 px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase text-green mb-3">
+                                    Before AI
+                                </div>
                                 <h4 className="text-[17px] font-bold tracking-[-0.02em] mb-2 text-cream">
                                     Trước đây: production truyền thống
                                 </h4>
                                 <p className="text-[14.5px] text-muted leading-[1.75]">
-                                    Booking diễn viên. Tìm bối cảnh. Setup ánh sáng. Makeup. Stylist. Quay nhiều ngày. Hậu kỳ. Chỉ riêng phần production đã tiêu tốn một khoản ngân sách rất lớn — không phù hợp với SME và brand vừa &amp; nhỏ.
+                                    Booking diễn viên. Tìm bối cảnh. Setup ánh sáng. Makeup. Stylist. Quay nhiều ngày. Hậu kỳ. Chỉ riêng phần <strong className="text-cream font-semibold">production</strong> đã tiêu tốn một khoản ngân sách rất lớn — không phù hợp với <strong className="text-green font-semibold">SME</strong> và <strong className="text-green font-semibold">brand vừa &amp; nhỏ</strong>.
                                 </p>
+                            </div>
                             </div>
                         </div>
                     </Reveal>
 
                     {/* Item 2 */}
                     <Reveal delay={120}>
-                        <div className="grid grid-cols-[80px_1fr] gap-6 items-start pb-10 relative after:content-[''] after:absolute after:left-[39px] after:top-[48px] after:bottom-0 after:w-[1px] after:bg-border last:after:hidden">
-                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-[22px] flex-shrink-0 border border-border bg-card text-cream">
+                        <div className="bg-card border border-border rounded-2xl p-6 mb-6 transition-all duration-300 hover:border-[rgba(240,237,232,0.2)] hover:bg-[rgba(240,237,232,0.07)] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                            <div className="grid grid-cols-[80px_1fr] gap-6 items-start pb-2 relative after:content-[''] after:absolute after:left-[39px] after:top-[48px] after:bottom-0 after:w-[1px] after:bg-border last:after:hidden">
+                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-[22px] flex-shrink-0 border border-blue/30 bg-[rgba(91,156,246,0.06)] text-blue shadow-[0_0_0_1px_rgba(91,156,246,0.06)]">
                                 <FaRobot />
                             </div>
                             <div>
+                                <div className="inline-flex items-center rounded-full border border-blue/20 bg-blue/10 px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase text-blue mb-3">
+                                    AI shift
+                                </div>
                                 <h4 className="text-[17px] font-bold tracking-[-0.02em] mb-2 text-cream">
                                     AI xuất hiện: lời giải hấp dẫn
                                 </h4>
                                 <p className="text-[14.5px] text-muted leading-[1.75]">
-                                    Chỉ cần vài prompt. Một vài hình ảnh. Một workflow tốt. Là đã có thể tạo ra những visual cinematic trước đây cần cả một ekip lớn — mở ra cơ hội rất lớn cho các brand sản xuất video nhanh hơn, linh hoạt hơn.
+                                    Chỉ cần vài prompt. Một vài hình ảnh. Một <strong className="text-green font-semibold">workflow</strong> tốt. Là đã có thể tạo ra những <strong className="text-cream font-semibold">visual cinematic</strong> trước đây cần cả một ekip lớn — mở ra cơ hội rất lớn cho các brand sản xuất video nhanh hơn, linh hoạt hơn.
                                 </p>
+                            </div>
                             </div>
                         </div>
                     </Reveal>
 
                     {/* Item 3 */}
                     <Reveal delay={160}>
-                        <div className="grid grid-cols-[80px_1fr] gap-6 items-start pb-0 relative after:content-[''] after:absolute after:left-[39px] after:top-[48px] after:bottom-0 after:w-[1px] after:bg-border last:after:hidden">
-                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-[22px] flex-shrink-0 border border-border bg-card text-cream">
+                        <div className="bg-card border border-border rounded-2xl p-6 mb-6 transition-all duration-300 hover:border-[rgba(240,237,232,0.2)] hover:bg-[rgba(240,237,232,0.07)] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                            <div className="grid grid-cols-[80px_1fr] gap-6 items-start pb-0 relative after:content-[''] after:absolute after:left-[39px] after:top-[48px] after:bottom-0 after:w-[1px] after:bg-border last:after:hidden">
+                            <div className="w-12 h-12 rounded-[14px] flex items-center justify-center text-[22px] flex-shrink-0 border border-purple/30 bg-[rgba(184,156,246,0.06)] text-purple shadow-[0_0_0_1px_rgba(184,156,246,0.06)]">
                                 <FaChartLine />
                             </div>
                             <div>
+                                <div className="inline-flex items-center rounded-full border border-purple/20 bg-purple/10 px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase text-purple mb-3">
+                                    Scale problem
+                                </div>
                                 <h4 className="text-[17px] font-bold tracking-[-0.02em] mb-2 text-cream">
                                     Bài toán mới: scale để tăng doanh số
                                 </h4>
@@ -81,6 +95,7 @@ export default function Problem() {
                                         video có giữ được người xem trong vài giây đầu không?
                                     </strong>
                                 </p>
+                            </div>
                             </div>
                         </div>
                     </Reveal>

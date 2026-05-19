@@ -13,9 +13,33 @@ export default function UGCCard({ project, onClick }: UGCCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
+    const getYouTubeId = (url?: string) => {
+        if (!url) return null;
+        const patterns = [
+            /youtu\.be\/([^?&/]+)/,
+            /youtube\.com\/shorts\/([^?&/]+)/,
+            /youtube\.com\/watch\?v=([^?&/]+)/,
+            /youtube\.com\/embed\/([^?&/]+)/,
+        ];
+        for (const p of patterns) {
+            const m = url.match(p as RegExp);
+            if (m) return m[1];
+        }
+        return null;
+    };
+
+    const ytId = getYouTubeId(project.videoUrl);
+    const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : null;
+    const [showYtPlayer, setShowYtPlayer] = useState(false);
+
     const handleMouseEnter = () => {
         setIsHovered(true);
-        if (videoRef.current) {
+        // Only attempt to play when the source is a direct video file
+        if (ytId) {
+            // show inline muted autoplay iframe for YouTube on hover
+            setShowYtPlayer(true);
+        }
+        if (!ytId && videoRef.current) {
             videoRef.current.play().catch((err) => {
                 console.log("Play interrupted or failed: ", err);
             });
@@ -24,6 +48,9 @@ export default function UGCCard({ project, onClick }: UGCCardProps) {
 
     const handleMouseLeave = () => {
         setIsHovered(false);
+        if (ytId) {
+            setShowYtPlayer(false);
+        }
         if (videoRef.current) {
             videoRef.current.pause();
         }
@@ -36,16 +63,36 @@ export default function UGCCard({ project, onClick }: UGCCardProps) {
             onClick={onClick}
             className="group relative aspect-[9/16] rounded-[14px] border border-border overflow-hidden bg-[#0d0d0d] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:border-[rgba(240,237,232,0.2)] cursor-pointer"
         >
-            {/* Thẻ Video: Hiển thị 100% thời gian, đóng vai trò thumbnail từ frame đầu tiên */}
-            <video
-                ref={videoRef}
-                src={project.videoUrl}
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
-            />
+            {/* Thẻ Video hoặc YouTube thumbnail */}
+            {ytThumbnail ? (
+                // Show YouTube thumbnail image for YouTube links
+                // hovering will replace it with a muted autoplay iframe; clicking still opens lightbox
+                showYtPlayer ? (
+                    <iframe
+                        src={`https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1`}
+                        title={project.title}
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        className="absolute inset-0 w-full h-full"
+                        style={{ pointerEvents: "none" }}
+                    />
+                ) : (
+                    <img
+                        src={ytThumbnail}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                    />
+                )
+            ) : (
+                <video
+                    ref={videoRef}
+                    src={project.videoUrl}
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                />
+            )}
 
             {/* Lớp Overlay kính mờ tối đi khi hover để nổi bật nút Play */}
             <div className="absolute inset-0 bg-black/15 group-hover:bg-black/35 transition-colors duration-300 z-10"></div>

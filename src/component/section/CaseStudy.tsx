@@ -145,17 +145,7 @@ export default function CaseStudy() {
                                 >
                                     {isMuted ? <FaVolumeXmark size={14} /> : <FaVolumeHigh size={14} />}
                                 </button>
-                            </div>
-
-                            {/* Background Number */}
-                            <div className="relative z-10 text-center pointer-events-none mix-blend-screen select-none">
-                                <div className="text-[100px] font-black tracking-tighter leading-none text-white/10">
-                                    {String(activeIdx + 1).padStart(2, "0")}
-                                </div>
-                                <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/30 mt-1">
-                                    {activeIdx + 1} / {CASE_STUDIES.length}
-                                </div>
-                            </div>
+                            </div>                           
                         </div>
 
                         {/* Cột phải: Content */}

@@ -6,7 +6,6 @@ import Story from '@/component/section/Story';
 import About from '@/component/section/About';
 import Problem from '@/component/section/Problem';
 import Solution from '@/component/section/Solution';
-import Service from '@/component/section/Service';
 import Performance from '@/component/section/Performance';
 import CaseStudy from '@/component/section/CaseStudy';
 import UGC from '@/component/section/UGC';
@@ -23,7 +22,6 @@ export default function Home() {
       <About />
       <Problem />
       <Solution />
-      <Service />
       <Performance />
       <CaseStudy />
       <UGC />

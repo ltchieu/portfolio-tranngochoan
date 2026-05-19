@@ -12,20 +12,20 @@ const GRADIENTS = [
 ];
 
 const RAW_PROJECTS = [
-    { title: 'AI UGC Gym Supplement', video: 'gym-supplement.mp4' },
-    { title: 'Camping Tent Lifestyle', video: 'camping-tent.mp4' },
-    { title: 'Condom Brand Social Ad', video: 'condom-brand.mp4' },
-    { title: 'Fishing Product Hook Video', video: 'fishing-product.mp4' },
-    { title: 'Hair Care Product Review', video: 'hair-care.mp4' },
-    { title: 'Men Sneakers Street UGC', video: 'men-sneakers.mp4' },
-    { title: 'Pet Care Creator Style', video: 'pet-care.mp4' },
-    { title: 'Phone Case TikTok Ad', video: 'phone-case.mp4' },
-    { title: 'Pickleball Paddle Creator', video: 'pickleball-paddle.mp4' },
-    { title: 'POD T-Shirt Brand Video', video: 'pod-tshirt.mp4' },
-    { title: 'Press-On Nails UGC', video: 'press-on-nails.mp4' },
-    { title: 'Skincare Product Demo', video: 'skincare.mp4' },
-    { title: 'Sunscreen Summer Hook', video: 'sunscreen.mp4' },
-    { title: 'Weight Loss Transformation', video: 'weight-loss.mp4' }
+    { title: 'Gym Supplement', video: 'https://www.youtube.com/watch?v=t1d1rb9_-FE' },
+    { title: 'Camping Tent', video: 'https://www.youtube.com/watch?v=Z5pHjb53szc' },
+    { title: 'Condom Brand', video: 'https://www.youtube.com/watch?v=XX06z26xfMg' },
+    { title: 'Fishing Product', video: 'https://www.youtube.com/watch?v=0NbZGkg6-_4' },
+    { title: 'Hair Care Product', video: 'https://www.youtube.com/watch?v=LPI-NLGzh_o' },
+    { title: 'Mens Sneakers', video: 'https://www.youtube.com/watch?v=cbeuKn3o4FE' },
+    { title: 'Pet Care Product', video: 'https://www.youtube.com/watch?v=ZPGj1jiuY9k' },
+    { title: 'Phone Case', video: 'https://www.youtube.com/watch?v=vRlfWIpIphk' },
+    { title: 'Pickleball Paddle', video: 'https://www.youtube.com/watch?v=_xNsGJKv3ZY' },
+    { title: 'POD T Shirt Brand', video: 'https://www.youtube.com/watch?v=_UDjUoYtuIU' },
+    { title: 'Press On Nails', video: 'https://www.youtube.com/watch?v=wBjUU5LR6sc' },
+    { title: 'Skincare Product', video: 'https://www.youtube.com/watch?v=Nd_1fD0XnJI' },
+    { title: 'Sunscreen Product', video: 'https://www.youtube.com/watch?v=NBdhTxP9XtM' },
+    { title: 'Weight Loss Transformation', video: 'https://www.youtube.com/watch?v=UXXMMeTUnJc' }
 ];
 
 // Tạo mảng dữ liệu chuẩn xác
@@ -34,5 +34,5 @@ export const UGC_PROJECTS: UGCProject[] = RAW_PROJECTS.map((item, index) => ({
     title: item.title,
     tags: ["TikTok", "AI UGC"],
     gradient: GRADIENTS[index % GRADIENTS.length],
-    videoUrl: `/videoUGC/${item.video}`,
+    videoUrl: item.video,
 }));

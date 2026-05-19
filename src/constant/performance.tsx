@@ -2,9 +2,8 @@ import {
   FaRobot, FaTv, FaPalette, FaEye, FaMobileScreen,
   FaUserTie, FaMagnet, FaFlask, FaRulerCombined, FaBoltLightning,
   FaMagnifyingGlass, FaPenNib, FaMasksTheater, FaClapperboard, FaChartSimple,
-  FaBullseye, FaStopwatch, FaLightbulb
 } from "react-icons/fa6";
-import { VSItem, ProcessStep, MindsetItem } from "../types/performance";
+import { VSItem, ProcessStep } from "../types/performance";
 
 export const VS_BAD_ITEMS: VSItem[] = [
   { icon: <FaRobot />, text: 'Chuyển động còn giả và quá "AI"' },
@@ -30,28 +29,4 @@ export const PROCESS_STEPS: ProcessStep[] = [
   { num: "05", icon: <FaClapperboard />, text: "Dựng theo nhịp social media" },
   { num: "06", icon: <FaChartSimple />, text: "Tối ưu retention & watch time" },
   { num: "07", icon: <FaBoltLightning />, text: "Scale thêm nhiều variations" },
-];
-
-export const MINDSET_CARDS: MindsetItem[] = [
-  {
-    icon: <FaBullseye />,
-    category: "Hooks",
-    body: ["Curiosity hooks", "Reaction hooks", "Problem-solution"],
-  },
-  {
-    icon: <FaMobileScreen />,
-    category: "Platforms",
-    body: ["TikTok Ads", "Meta Ads", "YouTube Shorts"],
-  },
-  {
-    icon: <FaStopwatch />,
-    category: "Creative Focus",
-    body: ["Watch time", "Retention", "Scroll interruption"],
-  },
-  {
-    icon: <FaLightbulb />,
-    category: "Mindset",
-    body: ["Good traffic", "can't save", "bad creatives."],
-    isDark: true,
-  },
 ];

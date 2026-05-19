@@ -9,6 +9,26 @@ import { FaXmark } from "react-icons/fa6";
 export default function UGC() {
     const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null);
 
+    // Helpers to detect YouTube IDs and produce embed URLs
+    const getYouTubeId = (url: string | null) => {
+        if (!url) return null;
+        const patterns = [
+            /youtu\.be\/([^?&/]+)/,
+            /youtube\.com\/shorts\/([^?&/]+)/,
+            /youtube\.com\/watch\?v=([^?&/]+)/,
+            /youtube\.com\/embed\/([^?&/]+)/,
+        ];
+        for (const p of patterns) {
+            const m = url.match(p as RegExp);
+            if (m) return m[1];
+        }
+        return null;
+    };
+
+    const getYouTubeEmbed = (url: string | null) => {
+        const id = getYouTubeId(url);
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1&controls=1&rel=0` : null;
+    };
     return (
         <section id="ugc" className="py-24 px-5 md:px-9 border-b border-border bg-[rgba(240,237,232,0.02)] relative overflow-hidden">
 
@@ -65,14 +85,14 @@ export default function UGC() {
 
             </div>
 
-            {/* Video Lightbox Modal */}
+            {/* Video Lightbox Modal (YouTube iframe for YouTube links, <video> fallback for direct files) */}
             {activeVideoUrl && (
-                <div 
+                <div
                     onClick={() => setActiveVideoUrl(null)}
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-all duration-350 cursor-zoom-out"
                 >
-                    <div 
-                        onClick={(e) => e.stopPropagation()} 
+                    <div
+                        onClick={(e) => e.stopPropagation()}
                         className="relative max-w-[340px] md:max-w-[400px] w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0d] shadow-2xl flex items-center justify-center"
                     >
                         {/* Close button */}
@@ -83,13 +103,31 @@ export default function UGC() {
                             <FaXmark size={18} />
                         </button>
 
-                        <video
-                            src={activeVideoUrl}
-                            autoPlay
-                            controls
-                            loop
-                            className="w-full h-full object-cover"
-                        />
+                        {(() => {
+                            const embed = getYouTubeEmbed(activeVideoUrl);
+                            if (embed) {
+                                return (
+                                    <iframe
+                                        src={embed}
+                                        title="UGC video"
+                                        allow="autoplay; encrypted-media; picture-in-picture"
+                                        allowFullScreen
+                                        className="w-full h-full"
+                                    />
+                                );
+                            }
+
+                            // Fallback to <video> for direct file urls
+                            return (
+                                <video
+                                    src={activeVideoUrl || undefined}
+                                    autoPlay
+                                    controls
+                                    loop
+                                    className="w-full h-full object-cover"
+                                />
+                            );
+                        })()}
                     </div>
                 </div>
             )}

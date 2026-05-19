@@ -1,4 +1,4 @@
-import { MINDSET_CARDS, PROCESS_STEPS, VS_BAD_ITEMS, VS_GOOD_ITEMS } from "@/constant/performance";
+import { PROCESS_STEPS, VS_BAD_ITEMS, VS_GOOD_ITEMS } from "@/constant/performance";
 import Reveal from "../ui/Reveal";
 import { FaXmark, FaCheck } from "react-icons/fa6";
 
@@ -88,34 +88,7 @@ export default function Performance() {
                             ))}
                         </div>
                     </div>
-                </Reveal>
-
-                {/* Mindset Row */}
-                <Reveal delay={160}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                        {MINDSET_CARDS.map((card, idx) => (
-                            <div
-                                key={idx}
-                                className={`rounded-[14px] p-6 text-center transition-transform hover:-translate-y-1 ${card.isDark
-                                    ? "bg-green text-[#0D0D0D] shadow-[0_10px_30px_rgba(205,255,90,0.15)]"
-                                    : "bg-card border border-border hover:border-[rgba(240,237,232,0.2)]"
-                                    }`}
-                            >
-                                <div className={`text-[28px] mb-3 flex justify-center ${card.isDark ? "text-[#0D0D0D]" : "text-cream"}`}>
-                                    {card.icon}
-                                </div>
-                                <div className={`text-[10px] font-bold tracking-[0.16em] uppercase mb-2 ${card.isDark ? "text-[rgba(13,13,13,0.6)]" : "text-muted"}`}>
-                                    {card.category}
-                                </div>
-                                {/* Sử dụng whitespace-pre-line để tự động xuống dòng từ mảng strings */}
-                                <div className={`text-[14px] leading-[1.7] whitespace-pre-line ${card.isDark ? "text-[rgba(13,13,13,0.8)] font-bold" : "text-muted"}`}>
-                                    {card.body.join('\n')}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </Reveal>
-
+                </Reveal>            
             </div>
         </section>
     );
