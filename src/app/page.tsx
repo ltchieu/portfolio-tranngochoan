@@ -9,6 +9,8 @@ import Solution from '@/component/section/Solution';
 import Service from '@/component/section/Service';
 import Performance from '@/component/section/Performance';
 import CaseStudy from '@/component/section/CaseStudy';
+import UGC from '@/component/section/UGC';
+import Contact from '@/component/section/Contact';
 
 export default function Home() {
   return (
@@ -24,6 +26,8 @@ export default function Home() {
       <Service />
       <Performance />
       <CaseStudy />
+      <UGC />
+      <Contact />
     </>
   );
 }
