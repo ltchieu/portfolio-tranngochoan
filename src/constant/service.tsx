@@ -2,7 +2,6 @@ import {
     FaMobileScreen,
     FaClapperboard,
     FaWandMagicSparkles,
-    FaBullseye
 } from "react-icons/fa6";
 
 export const SERVICES_DATA = [
@@ -29,13 +28,5 @@ export const SERVICES_DATA = [
         desc: "Video thời trang ngắn mang phong cách cao cấp (Luxury) dành riêng cho social media và quảng cáo.",
         colorHover: "hover:border-purple/50",
         glow: "from-purple/20 to-transparent",
-    },
-    {
-        num: "04",
-        icon: <FaBullseye />,
-        title: "Performance Creatives",
-        desc: "Creative tối ưu Hook để giữ chân người xem, tăng watch-time và dễ dàng scale số lượng lớn khi test.",
-        colorHover: "hover:border-orange/50",
-        glow: "from-orange/20 to-transparent",
     }
 ];

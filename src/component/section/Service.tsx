@@ -14,7 +14,7 @@ export default function Services() {
                                 Dịch vụ
                             </div>
                             <h2 className="text-[clamp(28px,4vw,52px)] font-bold tracking-[-0.04em] leading-[1.08] text-cream">
-                                Bốn hướng em đang phát triển.
+                                Ba hướng em đang phát triển.
                             </h2>
                         </div>
                         <p className="text-[14px] text-muted max-w-[320px] pb-2">
@@ -65,7 +65,6 @@ export default function Services() {
                                         {svc.desc}
                                     </p>
                                 </div>
-
                             </div>
                         ))}
                     </div>
