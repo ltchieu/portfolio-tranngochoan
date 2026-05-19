@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Khai báo màu sắc */
+  --color-cream: #F0EDE8;
+  --color-muted: rgba(240, 237, 232, 0.5);
+  --color-faint: rgba(240, 237, 232, 0.15);
+  --color-border: rgba(240, 237, 232, 0.1);
+  --color-green: #CDFF5A;
+  --color-orange: #FF6A35;
+  --color-blue: #5B9CF6;
+  --color-purple: #B89CF6;
+  --color-card: rgba(240, 237, 232, 0.05);
+  --color-bg: #0D0D0D;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Khai báo Animation */
+  --animate-fi: fi 0.5s ease both;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-pulse-custom: pulseCustom 2s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Khai báo Keyframes */
+  @keyframes fi {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulseCustom {
+
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+  }
+
+  @keyframes glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(205, 255, 90, 0.2);
+    }
+
+    50% {
+      box-shadow: 0 0 40px rgba(205, 255, 90, 0.5);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Base styles thay thế cho @layer base cũ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: var(--color-green);
+    color: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 2px;
+  }
+}
+
+/* Utility class cho background dạng lưới */
+@utility bg-grid-lines {
+  background-image: linear-gradient(rgba(240, 237, 232, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 237, 232, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
